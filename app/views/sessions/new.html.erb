@@ -1,0 +1,11 @@
+<%= form_for(:session, url: login_path) do |f| %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+
+  <%= f.label :password %>
+  <%#= link_to "(forgot password)", new_password_reset_path %>
+  <%= f.password_field :password %>
+
+  <%= f.submit "Log in", class: "btn btn-primary" %>
+<% end %>
