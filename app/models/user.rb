@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   before_create :create_remember_token 
   has_secure_password
+  has_many :posts
   validates :password, length: { minimum: 6 }
 
   def User.new_remember_token
