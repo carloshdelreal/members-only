@@ -21,4 +21,9 @@ class PostsController < ApplicationController
           redirect_to signin_url
         end
       end
+
+      private
+      def post_params
+        params.require(:post).permit(:title, :body)
+       end 
 end
