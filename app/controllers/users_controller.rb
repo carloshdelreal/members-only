@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show]
+  before_action :not_logged_in_user, only:[:new, :create]
+  
 
 
   # GET /users/1
@@ -40,5 +42,12 @@ class UsersController < ApplicationController
 				flash[:danger] = "Please log in."
 				redirect_to login_url
 			end
-		end
+    end
+    
+    def not_logged_in_user
+      if logged_in?
+        flash[:danger] = "You are already logged in!"
+        redirect_to root_url
+      end
+    end
 end
