@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 	attr_accessor :remember_token
 	before_create :create_session_token
-	
+	validates :password, length: { minimum: 6 }
 
 	has_secure_password
 	has_many :posts
@@ -33,6 +33,4 @@ class User < ApplicationRecord
 	def to_s
 		"#{self.name} as #{self.username}"
 	end
-
-
 end

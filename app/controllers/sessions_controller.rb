@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       remember(user)
       current_user
       redirect_to posts_path
-      flash[:danger] = 'Congratulations, You Have logged In!!'
+      flash[:success] = 'Thank you for signing in!'
     else 
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
@@ -20,10 +20,6 @@ class SessionsController < ApplicationController
   def destroy
     sign_out
     redirect_to root_url
-    flash[:danger] = 'Congratulations, You Have logged Out!!'
+    flash[:success] = 'You Have logged Out!!'
   end
-
-
-  
-  
 end
