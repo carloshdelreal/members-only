@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post '/signup',  to: 'users#create'
   get '/profile', to: 'users#show'
   root 'sessions#new'
-
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
   resources :posts,     only: [:new, :create, :index]
   resources :users, only: [:new, :create, :show]
 
