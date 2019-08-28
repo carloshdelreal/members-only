@@ -23,5 +23,5 @@ class ApplicationController < ActionController::Base
 		forget(current_user)
     session.delete(:user_id)
     @current_user = nil
-	end
+  end
 end
