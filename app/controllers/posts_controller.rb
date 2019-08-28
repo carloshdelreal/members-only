@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :new]
+  before_action :logged_in_user, only: %i[create new]
 
   # GET /posts
   def index
@@ -10,7 +12,6 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
   end
-
 
   # POST /posts
   def create
@@ -25,21 +26,19 @@ class PostsController < ApplicationController
       flash.now[:danger] = 'There was a problem with your post'
       render :new
     end
-  
   end
 
-
   private
-    
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:content)
-    end
 
-    def logged_in_user
-			unless logged_in?
-				flash[:danger] = "Please log in."
-				redirect_to login_url
-			end
-		end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:content)
+  end
+
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = 'Please log in.'
+      redirect_to login_url
+    end
+    end
 end
