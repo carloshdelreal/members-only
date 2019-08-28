@@ -1,5 +1,5 @@
 module UsersHelper
   def username
-    current_user.username
+    return current_user.username if current_user
   end
 end
