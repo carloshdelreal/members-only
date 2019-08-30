@@ -1,16 +1,15 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show]
   before_action :not_logged_in_user, only:[:new, :create]
-  # GET /users/1
+
   def show
     @user = current_user
   end
-  # GET /users/new
+
   def new
     @user = User.new
   end
-  # POST /users
-  # POST /users.json
+ 
   def create
     @user = User.new(user_params)
     if @user.save
@@ -21,8 +20,9 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
+  
     def user_params
       params.require(:user).permit(:name, :username, :email, :password, :password_confirmation)
     end
