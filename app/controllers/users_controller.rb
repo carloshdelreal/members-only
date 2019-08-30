@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     end
 
     def not_logged_in_user
-      if logged_in?
+      unless logged_in? == false
         flash[:danger] = "You are already logged in!"
         redirect_to root_url
       end
