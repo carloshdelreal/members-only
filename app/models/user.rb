@@ -11,7 +11,7 @@ class User < ApplicationRecord
   # Returns a random token.
   def self.new_token
     SecureRandom.urlsafe_base64
-   end
+  end
 
   def self.digest(string)
     Digest::SHA1.hexdigest string
@@ -30,7 +30,7 @@ class User < ApplicationRecord
   # Forgets a user.
   def forget
     update_attribute(:remember_digest, nil)
-   end
+  end
 
   def to_s
     "#{name} as #{username}"
