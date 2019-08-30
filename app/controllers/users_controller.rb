@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show]
-  before_action :not_logged_in_user, only:[:new, :create]
+  before_action :not_logged_in_user, only: %i[new create]
 
   def show
     @user = current_user
@@ -9,7 +11,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
- 
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -22,22 +24,22 @@ class UsersController < ApplicationController
   end
 
   private
-  
-    def user_params
-      params.require(:user).permit(:name, :username, :email, :password, :password_confirmation)
-    end
 
-    def logged_in_user
-			unless logged_in?
-				flash[:danger] = "Please log in."
-				redirect_to login_url
-			end
-    end
+  def user_params
+    params.require(:user).permit(:name, :username, :email, :password, :password_confirmation)
+  end
 
-    def not_logged_in_user
-      unless logged_in? == false
-        flash[:danger] = "You are already logged in!"
-        redirect_to root_url
-      end
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = 'Please log in.'
+      redirect_to login_url
     end
+  end
+
+  def not_logged_in_user
+    unless logged_in? == false
+      flash[:danger] = 'You are already logged in!'
+      redirect_to root_url
+    end
+  end
 end

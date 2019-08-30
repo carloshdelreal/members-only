@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsersHelper
   # Get the username in the view
   def username
