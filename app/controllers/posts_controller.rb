@@ -28,7 +28,7 @@ class PostsController < ApplicationController
     end
   end
 
-    private
+  private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
@@ -40,5 +40,5 @@ class PostsController < ApplicationController
 
     flash[:danger] = 'Please log in.'
     redirect_to login_url
-    end
   end
+end
