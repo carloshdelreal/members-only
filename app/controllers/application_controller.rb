@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   # Logs in the given user.
   def log_in(user)
     session[:user_id] = user.id
+    sign_in(user)
   end
 
   # Remembers a user in a persistent session.
@@ -22,10 +23,10 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_in(user)
-    remember_token = User.new_remember_token
+    remember_token = User.new_token
     cookies.permanent[:remember_token] = remember_token
     user.update_attribute(:remember_token, User.digest(remember_token))
-    self.current_user = user
+    @current_user = user
   end
 
   def sign_out
