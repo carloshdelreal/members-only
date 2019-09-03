@@ -1,0 +1,21 @@
+<header class="navbar navbar-fixed-top navbar-inverse" >
+   <div class="container">
+    <%= link_to "Members Only", posts_path, id: "logo" %>
+    <nav>
+       <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Posts", posts_path %></li>
+        <% if logged_in? %>
+          <% if username %>
+            <li><%= link_to "Hello, #{username}", profile_path %></li>
+          <% end %>
+          <li><%= link_to "Create Post", new_post_path %></li>
+          <li><%= link_to "Log out", logout_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", signup_path %></li>
+          <li><%= link_to "Log in", login_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
+
