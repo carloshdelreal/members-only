@@ -1,29 +1,44 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
-    before_action :signed_in_user, only: [:new, :create]
+  before_action :logged_in_user, only: %i[create new]
 
-    def new
-        @post = Post.new
-      end
+  # GET /posts
+  def index
+    @posts = Post.all
+  end
 
-      def create
-        @post = Post.new(post_params)
-        @post.user_id = current_user.id
-        @post.save
-        redirect_to root_path
-      end
+  # GET /posts/new
+  def new
+    @post = Post.new
+  end
 
-      def index
-        @posts = Post.all
-      end
+  # POST /posts
+  def create
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
 
-    def signed_in_user
-        unless signed_in?
-          redirect_to signin_url
-        end
-      end
+    if @post.save
+      redirect_to posts_path
+      flash[:success] = 'Congratulations, You have Posted on Members Only!!'
 
-      private
-      def post_params
-        params.require(:post).permit(:title, :body)
-       end 
+    else
+      flash.now[:danger] = 'There was a problem with your post'
+      render :new
+    end
+  end
+
+  private
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:content)
+  end
+
+  def logged_in_user
+    return unless logged_in? == false
+
+    flash[:danger] = 'Please log in.'
+    redirect_to login_url
+  end
 end

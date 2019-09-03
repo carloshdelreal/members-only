@@ -1,7 +1,10 @@
 linters:
   rubocop:
-    display_cop_name: true
-  csslint:
-  stylelint:
-  eslint:
-    config: './eslint.config'
+    display_cop_names: true
+files:
+  ignore:
+    - "bin/*"
+    - "db/*"
+    - "config/*"
+    - "Guardfile"
+    - "Rakefile"
